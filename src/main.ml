@@ -1,14 +1,23 @@
 type config =
   {
     target: string;
+    delay_head: float;
   }
 
 let read_config config_file =
   let yojson = Yojson.Safe.from_file ~fname:"config" config_file in
   let ezjsonm = Json_repr.from_yojson yojson in
-  let target = Json_encoding.(destruct (obj1 (req "target" (string))) ezjsonm) in
-  {
-    target
+  let encoding =
+    let open Json_encoding in
+    obj2 (req "target" string) (opt "delay_head" float)
+  in let target, delay_head = Json_encoding.destruct encoding ezjsonm in
+  let delay_head =
+    match delay_head with
+      Some delay_head -> delay_head
+    | None -> 10.
+  in {
+    target;
+    delay_head;
   }
 
 let config =
@@ -20,6 +29,9 @@ let config =
 
 let () = print_endline "config loaded"
 let () = print_endline ("We will monitor: " ^ config.target)
+let () =
+  Printf.printf "We will fetch head every %f second%s" config.delay_head
+    (if config.delay_head > 2. then "s\n" else "\n")
 
 let print_head head =
   print_endline (config.target ^ " is at " ^ head)
@@ -35,7 +47,7 @@ let rec peek_head =
       EzCohttp.get "peek_head" url ~error
         (fun s ->
           let () = print_head s in
-          let sleep = Lwt_unix.sleep 10. in
+          let sleep = Lwt_unix.sleep config.delay_head in
           let _ = Lwt.bind sleep peek_head in
           ())
     in
