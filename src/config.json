@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    "http://tz.api1.tzscan.io",
+    "http://tz.api2.tzscan.io",
+    "http://tz.next.tzscan.io",
+    "http://tz.s3.xtz.world",
+    "http://tz.s5.xtz.world",
+    "http://tz.s6.xtz.world",
+    "http://tz.s7.xtz.world",
+    "http://tz2.s7.xtz.world",
+    "http://tz.s8.xtz.world",
+    "http://tz2.s8.xtz.world",
+    "http://tz.alphanet.tzscan.io",
+    "http://tz.zeronet.tzscan.io"
+  ]
+}

@@ -1,0 +1,8 @@
+(executable
+ (name main)
+ (public_name main)
+ (libraries ez-api ez-api-cohttp ocplib_tezos Yojson))
+
+(install
+  (section bin)
+  (files config.json))

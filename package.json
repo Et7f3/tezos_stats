@@ -1,0 +1,35 @@
+{
+  "name": "tezos_stats",
+  "version": "0.0.0",
+  "description": "Display stats about tezos blockchain",
+  "main": "node.js",
+  "scripts": { "test": "echo no test", "run": "esy x main" },
+  "repository": { "type": "git", "url": "nop" },
+  "keywords": [ "tezos", "blockchain", "stats" ],
+  "author": "BRAMI Élie <elie.brami@epita.fr>",
+  "license": "ISC",
+  "dependencies": {
+    "@opam/cohttp": "2.1.3",
+    "@opam/cohttp-lwt-unix": "2.1.3",
+    "@opam/dune": "1.10.0",
+    "@opam/ipaddr": "2.9.0",
+    "@opam/lambda-term": "2.0.1",
+    "@opam/lwt": "4.2.1",
+    "@opam/ocplib-json-typed": "0.7.1",
+    "@opam/ppx_deriving_yojson": "3.5",
+    "@opam/utop": "2.4.0",
+    "@opam/yojson": "1.7.0",
+    "@opam/zarith": "1.7",
+    "ez-api": "*",
+    "ocaml": "^4.7.1004"
+  },
+  "esy": {
+    "build": [ "dune build -p tezos_stats -j4" ],
+    "install": [ "esy-installer tezos_stats.install" ]
+  },
+  "devDependencies": { "ocaml": ">=4.6.0 <4.8.0" },
+  "resolutions": {
+    "ocp-build": "github:Et7f3/ocp-build#94f0f92",
+    "ez-api": "github:Et7f3/ez-api#9d7ce37"
+  }
+}

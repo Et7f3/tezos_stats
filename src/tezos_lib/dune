@@ -1,0 +1,14 @@
+(library
+ (name ocplib_tezos)
+ (modules Tezos_types Tezos_utils Tezos_encoding)
+ (libraries zarith ocplib-json-typed ez-api))
+
+(library
+ (name tzscan_misc)
+ (modules Misc)
+ (libraries Yojson))
+
+(library
+ (name data_types_lib)
+ (modules Ico_constants Data_types Utils Debug_constants Micheline_printer Api_encoding Config Data_string Infos TzscanConfig)
+ (libraries ocplib_tezos tzscan_misc))
