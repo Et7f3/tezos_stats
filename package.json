@@ -3,9 +3,19 @@
   "version": "0.0.0",
   "description": "Display stats about tezos blockchain",
   "main": "node.js",
-  "scripts": { "test": "echo no test", "run": "esy x main" },
-  "repository": { "type": "git", "url": "nop" },
-  "keywords": [ "tezos", "blockchain", "stats" ],
+  "scripts": {
+    "test": "echo no test",
+    "run": "esy x main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "nop"
+  },
+  "keywords": [
+    "tezos",
+    "blockchain",
+    "stats"
+  ],
   "author": "BRAMI Élie <elie.brami@epita.fr>",
   "license": "ISC",
   "dependencies": {
@@ -27,7 +37,9 @@
     "build": [ "dune build -p tezos_stats -j4" ],
     "install": [ "esy-installer tezos_stats.install" ]
   },
-  "devDependencies": { "ocaml": ">=4.6.0 <4.8.0" },
+  "devDependencies": {
+    "ocaml": ">=4.6.0 <4.8.0"
+  },
   "resolutions": {
     "ocp-build": "github:Et7f3/ocp-build#94f0f92",
     "ez-api": "github:Et7f3/ez-api#9d7ce37"
