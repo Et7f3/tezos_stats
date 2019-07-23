@@ -49,9 +49,14 @@ let () = print_endline ("We will monitor: " ^ config.target)
 let () = fetch "head" config.delay_head
 let () = fetch "peers" config.delay_peers
 
-let print_head head =
-  let head = destruct Json_encoding.string head in
-  print_endline (config.target ^ " is at " ^ head)
+let print_head =
+  (* We don't use None / Some _ to avoid indirection *)
+  let last_head = ref "" in
+  function head ->
+    let head = destruct Json_encoding.string head in
+    if !last_head <> head then
+      let () = last_head := head in
+      print_endline (config.target ^ " is at " ^ head)
 
 let rec peek_head =
   let url = EzAPI.TYPES.URL (config.target ^ "/chains/main/blocks/head/hash")
@@ -70,15 +75,20 @@ let rec peek_head =
     in
     ret
 
-let print_peers peers =
-  let peers =
-    destruct Ocplib_tezos.Tezos_encoding.Encoding.Network.encoding peers
-  in let peers =
-    List.filter Ocplib_tezos.Tezos_types.(fun e -> e.state <> Disconnected)
-      peers
-  in let num = List.length peers in
-  Printf.printf "%s as %d active or running peer%s" config.target num
-    (if num > 2 then "s\n" else "\n")
+let print_peers =
+  (* We won't have -1 peer*)
+  let last_number_peers = ref ~-1 in
+  function peers ->
+    let peers =
+      destruct Ocplib_tezos.Tezos_encoding.Encoding.Network.encoding peers
+    in let peers =
+      List.filter Ocplib_tezos.Tezos_types.(fun e -> e.state <> Disconnected)
+        peers
+    in let num = List.length peers in
+    if !last_number_peers <> num then
+      let () = last_number_peers := num in
+      Printf.printf "%s as %d active or running peer%s" config.target num
+        (if num > 2 then "s\n" else "\n")
 
 let rec peek_peers =
   let url = EzAPI.TYPES.URL (config.target ^ "/network/peers")
