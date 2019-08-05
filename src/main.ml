@@ -49,7 +49,8 @@ let () = print_endline ("We will monitor: " ^ config.target)
 let () = fetch "head" config.delay_head
 let () = fetch "peers" config.delay_peers
 
-let generate_crawler_URL root url_name url inital_value encoding error delay action =
+let generate_crawler_URL root url_name url inital_value encoding error delay
+      action =
   let last_value = ref inital_value
   and url = EzAPI.TYPES.URL (root ^ url)
   and error =
@@ -66,7 +67,7 @@ let generate_crawler_URL root url_name url inital_value encoding error delay act
            EzCohttp.get url_name url ~error
              (fun s ->
                 let value = destruct encoding s in
-                let () = last_value := Some (action !last_value value) in
+                let () = last_value := action !last_value value in
                 let sleep = Lwt_unix.sleep delay in
                 let _ = Lwt.bind sleep peek_URL in
                 ())
@@ -77,47 +78,32 @@ let generate_crawler_URL root url_name url inital_value encoding error delay act
 let peek_head =
   let print_head head = print_endline (config.target ^ " is at " ^ head) in
   generate_crawler_URL config.target "peek_head"
-    "/chains/main/blocks/head/hash" None Json_encoding.string None
-    config.delay_head (function
-                          None ->
-                          (function head -> let () = print_head head in head)
-                        | Some last_head ->
-                          function head ->
-                            let () =
-                              if last_head <> head then
-                                print_head head
-                            in head)
+    "/chains/main/blocks/head/hash" "" Json_encoding.string None
+    config.delay_head
+    (function last_head ->
+     function head ->
+       let () =
+         if last_head <> head then
+           print_head head
+       in head)
 
-let print_peers =
-  (* We won't have -1 peer*)
-  let last_number_peers = ref ~-1 in
-  function peers ->
-    let peers =
-      destruct Ocplib_tezos.Tezos_encoding.Encoding.Network.encoding peers
-    in let peers =
-         List.filter Ocplib_tezos.Tezos_types.(fun e -> e.state <> Disconnected)
-           peers
-    in let num = List.length peers in
-    if !last_number_peers <> num then
-      let () = last_number_peers := num in
-      Printf.printf "%s as %d active or running peer%s" config.target num
-        (if num > 2 then "s\n" else "\n")
+let peek_peers =
+  let print_peers num =
+    Printf.printf "%s as %d active or running peer%s" config.target num
+      (if num > 2 then "s\n" else "\n")
+  in generate_crawler_URL config.target "peek_peers"
+       "/network/peers" ~-1
+       (Ocplib_tezos.Tezos_encoding.Encoding.Network.encoding) None
+       config.delay_peers
+       (function last_number_peers ->
+        function peers ->
+          let peers =
+            List.filter
+              Ocplib_tezos.Tezos_types.(fun e -> e.state <> Disconnected) peers
+          in let num = List.length peers in
+          let () =
+            if last_number_peers <> num then
+              print_peers num
+          in num)
 
-let rec peek_peers =
-  let url = EzAPI.TYPES.URL (config.target ^ "/network/peers")
-  and error = fun i -> function
-      Some s -> Printf.eprintf "A request has failed with error n: %s" s
-    | None -> Printf.eprintf "A request has failed with error n"
-  in function () ->
-    let ret, _resolver = Lwt.wait () in
-    let () =
-      EzCohttp.get __LOC__ url ~error
-        (fun s ->
-           let () = print_peers s in
-           let sleep = Lwt_unix.sleep config.delay_peers in
-           let _ = Lwt.bind sleep peek_peers in
-           ())
-    in
-    ret
-
-let () = Lwt.join [peek_head; peek_peers ()] |> Lwt_main.run
+let () = Lwt.join [peek_head; peek_peers] |> Lwt_main.run
