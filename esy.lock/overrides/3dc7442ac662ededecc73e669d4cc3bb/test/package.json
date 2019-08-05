@@ -1,0 +1,19 @@
+{
+  "name": "esy-libcurl-test",
+  "description": "For manual testing only",
+  "version": "0.1.0",
+  "license": "MIT",
+  "esy": {
+    "buildsInSource": true,
+    "build": [
+      "#{os == 'windows' ? 'x86_64-w64-mingw32-gcc': 'gcc'} $CFLAGS -o testinglibcurl https.c $LDFLAGS"
+    ],
+    "install": "cp testinglibcurl #{self.bin}"
+  },
+  "dependencies": {
+    "esy-libcurl": "*"
+  },
+  "resolutions": {
+    "esy-libcurl": "github:Et7f3/esy-libcurl#6b5f31ad512e0cda93c164c620ce3c19da43e462"
+  }
+}
