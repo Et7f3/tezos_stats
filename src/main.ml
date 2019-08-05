@@ -13,15 +13,15 @@ let read_config config_file =
     obj3 (req "target" string) (opt "delay_head" float)
       (opt "delay_peers" float)
   in let target, delay_head, delay_peers =
-    Json_encoding.destruct encoding ezjsonm
+       Json_encoding.destruct encoding ezjsonm
   in let delay_head =
-    match delay_head with
-      Some delay_head -> delay_head
-    | None -> 10.
+       match delay_head with
+         Some delay_head -> delay_head
+       | None -> 10.
   in let delay_peers =
-    match delay_peers with
-      Some delay_peers -> delay_peers
-    | None -> 60.
+       match delay_peers with
+         Some delay_peers -> delay_peers
+       | None -> 60.
   in {
     target;
     delay_head;
@@ -68,10 +68,10 @@ let rec peek_head =
     let () =
       EzCohttp.get __LOC__ url ~error
         (fun s ->
-          let () = print_head s in
-          let sleep = Lwt_unix.sleep config.delay_head in
-          let _ = Lwt.bind sleep peek_head in
-          ())
+           let () = print_head s in
+           let sleep = Lwt_unix.sleep config.delay_head in
+           let _ = Lwt.bind sleep peek_head in
+           ())
     in
     ret
 
@@ -82,8 +82,8 @@ let print_peers =
     let peers =
       destruct Ocplib_tezos.Tezos_encoding.Encoding.Network.encoding peers
     in let peers =
-      List.filter Ocplib_tezos.Tezos_types.(fun e -> e.state <> Disconnected)
-        peers
+         List.filter Ocplib_tezos.Tezos_types.(fun e -> e.state <> Disconnected)
+           peers
     in let num = List.length peers in
     if !last_number_peers <> num then
       let () = last_number_peers := num in
@@ -100,10 +100,10 @@ let rec peek_peers =
     let () =
       EzCohttp.get __LOC__ url ~error
         (fun s ->
-          let () = print_peers s in
-          let sleep = Lwt_unix.sleep config.delay_peers in
-          let _ = Lwt.bind sleep peek_peers in
-          ())
+           let () = print_peers s in
+           let sleep = Lwt_unix.sleep config.delay_peers in
+           let _ = Lwt.bind sleep peek_peers in
+           ())
     in
     ret
 
