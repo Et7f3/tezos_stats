@@ -11,7 +11,7 @@ build: [
 depends: [
   "cohttp" { "2.1.3" }
   "cohttp-lwt-unix" { "2.1.3" }
-  "dune" "1.10.0"
+  "dune" {"1.10.0"}
   "lambda-term" { "2.0.1" }
   "lwt" { "4.2.1" }
   "ocplib-json-typed" { "0.7.1" }
