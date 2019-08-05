@@ -1,0 +1,3 @@
+(library
+ (name data_types_lib)
+ (libraries ocplib_tezos tzscan_misc))

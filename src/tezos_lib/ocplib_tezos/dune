@@ -1,0 +1,3 @@
+(library
+ (name ocplib_tezos)
+ (libraries zarith ocplib-json-typed ez-api))
