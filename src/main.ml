@@ -49,42 +49,44 @@ let () = print_endline ("We will monitor: " ^ config.target)
 let () = fetch "head" config.delay_head
 let () = fetch "peers" config.delay_peers
 
-let generate_crawler_URL root url_name url initalValue encoding errorHandler delay action =
-  let last_value = ref initalValue in
-  let rec peek_URL =
-    let url = EzAPI.TYPES.URL (root ^ url)
-    and error =
-      match errorHandler with
-        Some error -> error
-      | None -> (fun i -> function
-                    Some s -> Printf.eprintf "A request has failed with error n: %s" s
-                  | None -> Printf.eprintf "A request has failed with error n")
-    in function () ->
-      let ret, _resolver = Lwt.wait () in
-      let () =
-        EzCohttp.get url_name url ~error
-          (fun s ->
-             let value = destruct encoding s in
-             let () = action !last_value value in
-             let () = last_value := Some s in
-             let sleep = Lwt_unix.sleep delay in
-             let _ = Lwt.bind sleep peek_URL in
-             ())
-      in
-      ret
+let generate_crawler_URL root url_name url inital_value encoding error delay action =
+  let last_value = ref inital_value
+  and url = EzAPI.TYPES.URL (root ^ url)
+  and error =
+    match error with
+      Some error -> error
+    | None ->
+      (fun i -> function
+           Some s -> Printf.eprintf "A request has failed with error n: %s" s
+         | None -> Printf.eprintf "A request has failed with error n")
+  and ret, _resolver = Lwt.wait ()
+  in let rec peek_URL =
+       function () ->
+         let () =
+           EzCohttp.get url_name url ~error
+             (fun s ->
+                let value = destruct encoding s in
+                let () = last_value := Some (action !last_value value) in
+                let sleep = Lwt_unix.sleep delay in
+                let _ = Lwt.bind sleep peek_URL in
+                ())
+         in
+         ret
   in peek_URL ()
 
 let peek_head =
+  let print_head head = print_endline (config.target ^ " is at " ^ head) in
   generate_crawler_URL config.target "peek_head"
     "/chains/main/blocks/head/hash" None Json_encoding.string None
     config.delay_head (function
                           None ->
-                          (function head ->
-                             print_endline (config.target ^ " is at " ^ head))
+                          (function head -> let () = print_head head in head)
                         | Some last_head ->
                           function head ->
-                            if last_head <> head then
-                              print_endline (config.target ^ " is at " ^ head))
+                            let () =
+                              if last_head <> head then
+                                print_head head
+                            in head)
 
 let print_peers =
   (* We won't have -1 peer*)
