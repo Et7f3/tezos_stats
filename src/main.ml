@@ -49,31 +49,42 @@ let () = print_endline ("We will monitor: " ^ config.target)
 let () = fetch "head" config.delay_head
 let () = fetch "peers" config.delay_peers
 
-let print_head =
-  (* We don't use None / Some _ to avoid indirection *)
-  let last_head = ref "" in
-  function head ->
-    let head = destruct Json_encoding.string head in
-    if !last_head <> head then
-      let () = last_head := head in
-      print_endline (config.target ^ " is at " ^ head)
+let generate_crawler_URL root url_name url initalValue encoding errorHandler delay action =
+  let last_value = ref initalValue in
+  let rec peek_URL =
+    let url = EzAPI.TYPES.URL (root ^ url)
+    and error =
+      match errorHandler with
+        Some error -> error
+      | None -> (fun i -> function
+                    Some s -> Printf.eprintf "A request has failed with error n: %s" s
+                  | None -> Printf.eprintf "A request has failed with error n")
+    in function () ->
+      let ret, _resolver = Lwt.wait () in
+      let () =
+        EzCohttp.get url_name url ~error
+          (fun s ->
+             let value = destruct encoding s in
+             let () = action !last_value value in
+             let () = last_value := Some s in
+             let sleep = Lwt_unix.sleep delay in
+             let _ = Lwt.bind sleep peek_URL in
+             ())
+      in
+      ret
+  in peek_URL ()
 
-let rec peek_head =
-  let url = EzAPI.TYPES.URL (config.target ^ "/chains/main/blocks/head/hash")
-  and error = fun i -> function
-      Some s -> Printf.eprintf "A request has failed with error n: %s" s
-    | None -> Printf.eprintf "A request has failed with error n"
-  in function () ->
-    let ret, _resolver = Lwt.wait () in
-    let () =
-      EzCohttp.get __LOC__ url ~error
-        (fun s ->
-           let () = print_head s in
-           let sleep = Lwt_unix.sleep config.delay_head in
-           let _ = Lwt.bind sleep peek_head in
-           ())
-    in
-    ret
+let peek_head =
+  generate_crawler_URL config.target "peek_head"
+    "/chains/main/blocks/head/hash" None Json_encoding.string None
+    config.delay_head (function
+                          None ->
+                          (function head ->
+                             print_endline (config.target ^ " is at " ^ head))
+                        | Some last_head ->
+                          function head ->
+                            if last_head <> head then
+                              print_endline (config.target ^ " is at " ^ head))
 
 let print_peers =
   (* We won't have -1 peer*)
@@ -107,4 +118,4 @@ let rec peek_peers =
     in
     ret
 
-let () = Lwt.join [peek_head (); peek_peers ()] |> Lwt_main.run
+let () = Lwt.join [peek_head; peek_peers ()] |> Lwt_main.run
