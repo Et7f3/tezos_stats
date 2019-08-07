@@ -1,0 +1,47 @@
+{
+  "name": "esy-libcurl",
+  "version": "7.65.2001",
+  "description": "libcurl packaged for esy",
+  "source": "https://curl.haxx.se/download/curl-7.65.2.tar.xz#44d485f13009a64807d1d7bbea3db2275b6c1c8f",
+  "override": {
+    "buildsInSource": true,
+    "build": [
+      "./configure --prefix=#{self.install} #{os == 'windows' ? '--host x86_64-w64-mingw32' : ''} --with-pic",
+      "rm src/tool_hugehelp.c",
+      "make"
+    ],
+    "install": [
+      "make install"
+    ],
+    "exportedEnv": {
+      "LDFLAGS": {
+        "scope": "global",
+        "val": "-L#{self.lib} -lcurl"
+      },
+      "CPPFLAGS": {
+        "scope": "global",
+        "val": "-I#{self.install / 'include'}"
+      },
+      "CFLAGS": {
+        "scope": "global",
+        "val": "-I#{self.install / 'include'}"
+      },
+      "LD_LIBRARY_PATH": {
+        "scope": "global",
+        "val": "#{self.lib}:$LD_LIBRARY_PATH"
+      },
+      "LIBRARY_PATH": {
+        "scope": "global",
+        "val": "#{self.lib}:$LIBRARY_PATH"
+      },
+      "CPATH": {
+        "scope": "global",
+        "val": "#{self.install / 'include'}:$CPATH"
+      },
+      "PATH": {
+        "scope": "global",
+        "val": "#{self.bin}:$PATH"
+      }
+    }
+  }
+}

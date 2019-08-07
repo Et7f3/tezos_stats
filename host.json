@@ -1,0 +1,43 @@
+{
+  "name": "tezos_stats_backend",
+  "version": "0.0.0",
+  "description": "feed the database",
+  "main": "node.js",
+  "scripts": { "test": "echo no test", "run": "esy x host" },
+  "repository": { "type": "git", "url": "nop" },
+  "keywords": [ "tezos", "blockchain", "stats" ],
+  "author": "BRAMI Élie <elie.brami@epita.fr>",
+  "license": "ISC",
+  "dependencies": {
+    "@opam/dune": "1.11.0",
+    "@opam/ocaml-migrate-parsetree": "1.4.0",
+    "@opam/ocamlbuild": "0.14.0",
+    "@opam/ocplib-json-typed": "0.7.1",
+    "@opam/ppx_tools_versioned": "5.2.3",
+    "@opam/pgocaml": "github:Et7f3/pgocaml:pgocaml.opam#dunify",
+    "@opam/rresult": "0.6.0",
+    "@opam/yojson": "1.7.0",
+    "@opam/zarith": "1.7",
+    "ez-api": "*",
+    "ocaml": "^4.7.1004"
+  },
+  "esy": {
+    "build": [ "dune build src/host/host.exe" ],
+    "buildEnv": {
+      "PGHOST": "127.0.0.1",
+      "PGPASSWORD": "DUMMY_PASSWORD"
+    }
+  },
+  "devDependencies": {
+    "@opam/merlin": "3.3.2",
+    "@opam/ocp-indent": "1.7.0",
+    "@opam/utop": "2.4.0",
+    "ocaml": ">=4.6.0 <4.8.0"
+  },
+  "resolutions": {
+    "ocp-build": "github:Et7f3/ocp-build#94f0f92",
+    "ez-api": "github:Et7f3/ez-api#f6d0359",
+    "@opam/conf-libcurl": "github:Et7f3/esy-libcurl#e65a1e8",
+    "@opam/ocurl": "github:Et7f3/ocurl:opam#c6e674e"
+  }
+}
