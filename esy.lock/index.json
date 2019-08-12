@@ -104,20 +104,20 @@
       "dependencies": [],
       "devDependencies": []
     },
-    "@opam/zed@opam:2.0.2@42c1a642": {
-      "id": "@opam/zed@opam:2.0.2@42c1a642",
+    "@opam/zed@opam:2.0.3@7016ad7c": {
+      "id": "@opam/zed@opam:2.0.3@7016ad7c",
       "name": "@opam/zed",
-      "version": "opam:2.0.2",
+      "version": "opam:2.0.3",
       "source": {
         "type": "install",
         "source": [
-          "archive:https://opam.ocaml.org/cache/md5/5c/5c0cb1ee87147514adfd23966d58440e#md5:5c0cb1ee87147514adfd23966d58440e",
-          "archive:https://github.com/ocaml-community/zed/releases/download/2.0.2/zed-2.0.2.tbz#md5:5c0cb1ee87147514adfd23966d58440e"
+          "archive:https://opam.ocaml.org/cache/md5/87/878123c9114bf3c0bd18a19fb1af73cd#md5:878123c9114bf3c0bd18a19fb1af73cd",
+          "archive:https://github.com/ocaml-community/zed/releases/download/2.0.3/zed-2.0.3.tbz#md5:878123c9114bf3c0bd18a19fb1af73cd"
         ],
         "opam": {
           "name": "zed",
-          "version": "2.0.2",
-          "path": "esy.lock/opam/zed.2.0.2"
+          "version": "2.0.3",
+          "path": "esy.lock/opam/zed.2.0.3"
         }
       },
       "overrides": [],
@@ -248,7 +248,7 @@
         "@opam/ocamlfind@opam:1.8.1@c65fe06a",
         "@opam/lwt_react@opam:1.1.2@fb068e52",
         "@opam/lwt@opam:4.2.1@08ba7e51",
-        "@opam/lambda-term@opam:2.0.1@6ce56e6e",
+        "@opam/lambda-term@opam:2.0.2@ecff8c4f",
         "@opam/dune@opam:1.11.0@9ec4211e", "@opam/cppo@opam:1.6.6@f4f83858",
         "@opam/camomile@opam:1.0.1@ab4729e2",
         "@opam/base-unix@opam:base@87d0b2eb",
@@ -260,7 +260,7 @@
         "@opam/ocamlfind@opam:1.8.1@c65fe06a",
         "@opam/lwt_react@opam:1.1.2@fb068e52",
         "@opam/lwt@opam:4.2.1@08ba7e51",
-        "@opam/lambda-term@opam:2.0.1@6ce56e6e",
+        "@opam/lambda-term@opam:2.0.2@ecff8c4f",
         "@opam/dune@opam:1.11.0@9ec4211e",
         "@opam/camomile@opam:1.0.1@ab4729e2",
         "@opam/base-unix@opam:base@87d0b2eb",
@@ -1387,25 +1387,25 @@
       ],
       "devDependencies": [ "ocaml@4.7.1004@d41d8cd9" ]
     },
-    "@opam/lambda-term@opam:2.0.1@6ce56e6e": {
-      "id": "@opam/lambda-term@opam:2.0.1@6ce56e6e",
+    "@opam/lambda-term@opam:2.0.2@ecff8c4f": {
+      "id": "@opam/lambda-term@opam:2.0.2@ecff8c4f",
       "name": "@opam/lambda-term",
-      "version": "opam:2.0.1",
+      "version": "opam:2.0.2",
       "source": {
         "type": "install",
         "source": [
-          "archive:https://opam.ocaml.org/cache/md5/4b/4b4b8480fe1280e1ed2a34ed93d16675#md5:4b4b8480fe1280e1ed2a34ed93d16675",
-          "archive:https://github.com/ocaml-community/lambda-term/releases/download/2.0.1/lambda-term-2.0.1.tbz#md5:4b4b8480fe1280e1ed2a34ed93d16675"
+          "archive:https://opam.ocaml.org/cache/md5/46/4602aa4355705909e406513322b4b27e#md5:4602aa4355705909e406513322b4b27e",
+          "archive:https://github.com/ocaml-community/lambda-term/releases/download/2.0.2/lambda-term-2.0.2.tbz#md5:4602aa4355705909e406513322b4b27e"
         ],
         "opam": {
           "name": "lambda-term",
-          "version": "2.0.1",
-          "path": "esy.lock/opam/lambda-term.2.0.1"
+          "version": "2.0.2",
+          "path": "esy.lock/opam/lambda-term.2.0.2"
         }
       },
       "overrides": [],
       "dependencies": [
-        "ocaml@4.7.1004@d41d8cd9", "@opam/zed@opam:2.0.2@42c1a642",
+        "ocaml@4.7.1004@d41d8cd9", "@opam/zed@opam:2.0.3@7016ad7c",
         "@opam/react@opam:1.2.1@0e11855f",
         "@opam/lwt_react@opam:1.1.2@fb068e52",
         "@opam/lwt_log@opam:1.1.1@91643f38", "@opam/lwt@opam:4.2.1@08ba7e51",
@@ -1414,7 +1414,7 @@
         "@esy-ocaml/substs@0.0.1@d41d8cd9"
       ],
       "devDependencies": [
-        "ocaml@4.7.1004@d41d8cd9", "@opam/zed@opam:2.0.2@42c1a642",
+        "ocaml@4.7.1004@d41d8cd9", "@opam/zed@opam:2.0.3@7016ad7c",
         "@opam/react@opam:1.2.1@0e11855f",
         "@opam/lwt_react@opam:1.1.2@fb068e52",
         "@opam/lwt_log@opam:1.1.1@91643f38", "@opam/lwt@opam:4.2.1@08ba7e51",
