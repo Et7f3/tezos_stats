@@ -1,3 +1,6 @@
+open Opium.Std
+open Main_to_db
+
 (* init db *)
 let dbh = PGOCaml.connect ()
 
@@ -20,39 +23,39 @@ let () =
       build_date DATE,
       checkpoint_type TEXT)"]
 
-let () = print_endline "e"
+let () =
+  [%pgsql dbh
+            "execute"
+            "CREATE TABLE IF NOT EXISTS register (
+      name TEXT PRIMARY KEY,
+      token TEXT,
+      register_date TIMESTAMP)"]
 
-let dbh = PGOCaml.close(dbh)
+let () = Sys.catch_break true
 
-open Opium.Std
+let () =
+  at_exit
+    (fun () ->
+       let () = print_endline "We close handle to DB" in
+       PGOCaml.close dbh |> ignore)
 
-type person = {
-  name: string;
-  age: int;
-}
-let json_of_person { name ; age } =
-  let open Ezjsonm in
-  dict [ "name", (string name)
-       ; "age", (int age) ]
-
-let print_param =
-  put "/hello/:name" begin fun req ->
-    `String ("Hello " ^ param req "name") |> respond'
+let register =
+  get "/register" begin fun _req ->
+    `String (ok ()) |> respond'
   end
 
-let print_person =
-  get "/person/:name/:age" begin fun req ->
-    let person = {
-      name = param req "name";
-      age = "age" |> param req |> int_of_string;
-    } in
-    `Json (person |> json_of_person) |> respond'
+let shutdown_server =
+  get "/stop/:host_password" begin fun req ->
+    if param req "host_password" = Sys.getenv "host_password" then
+      exit 0
+    else
+      `String (error "Unauthorized") |> respond'
   end
 
 let a =
   App.empty
-  |> print_param
-  |> print_person
+  |> register
+  |> shutdown_server
   |> App.run_command'
 
 let () =

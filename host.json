@@ -16,6 +16,7 @@
       "PGHOST": "127.0.0.1",
       "LOCALPORT": "9000",
       "PGPASSWORD": "DUMMY_PASSWORD"
+      "host_password": "ANOTHER_DUMMY_PASSWORD",
     }
   }
 }
