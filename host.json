@@ -3,15 +3,19 @@
   "version": "0.0.0",
   "description": "feed the database",
   "main": "node.js",
-  "scripts": { "test": "echo no test", "run": "esy x host" },
+  "scripts": {
+    "test": "echo no test",
+    "run": "esy @host b dune exec src/host/host.exe -- -p $LOCALPORT"
+  },
   "repository": { "type": "git", "url": "nop" },
   "keywords": [ "tezos", "blockchain", "stats" ],
   "author": "BRAMI Élie <elie.brami@epita.fr>",
   "license": "ISC",
   "dependencies": {
-    "@opam/pgocaml": "github:Et7f3/pgocaml:pgocaml.opam#dunify",
     "@opam/dune": "1.11.0",
     "@opam/ocplib-json-typed": "0.7.1",
+    "@opam/opium": "0.17.1",
+    "@opam/pgocaml": "github:Et7f3/pgocaml:pgocaml.opam#dunify",
     "@opam/yojson": "1.7.0",
     "@opam/zarith": "1.7",
     "ez-api": "*",
@@ -22,6 +26,7 @@
     "buildEnv": {
       "PGHOST": "127.0.0.1",
       "PGPASSWORD": "DUMMY_PASSWORD"
+      "LOCALPORT": "9000",
     }
   },
   "devDependencies": {

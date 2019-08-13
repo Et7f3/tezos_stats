@@ -2,5 +2,5 @@
  (name host)
  (public_name host)
  (package host)
- (libraries pgocaml ocplib-json-typed)
+ (libraries pgocaml opium ocplib-json-typed)
  (preprocess (pps pgocaml.ppx)))

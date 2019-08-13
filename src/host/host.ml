@@ -23,3 +23,42 @@ let () =
 let () = print_endline "e"
 
 let dbh = PGOCaml.close(dbh)
+
+open Opium.Std
+
+type person = {
+  name: string;
+  age: int;
+}
+let json_of_person { name ; age } =
+  let open Ezjsonm in
+  dict [ "name", (string name)
+       ; "age", (int age) ]
+
+let print_param =
+  put "/hello/:name" begin fun req ->
+    `String ("Hello " ^ param req "name") |> respond'
+  end
+
+let print_person =
+  get "/person/:name/:age" begin fun req ->
+    let person = {
+      name = param req "name";
+      age = "age" |> param req |> int_of_string;
+    } in
+    `Json (person |> json_of_person) |> respond'
+  end
+
+let a =
+  App.empty
+  |> print_param
+  |> print_person
+  |> App.run_command'
+
+let () =
+  match a with
+    `Ok w ->
+    let () = print_endline "We launch server" in
+    Lwt_main.run w
+  | `Error -> print_endline "error"
+  | `Not_running -> print_endline "not running"

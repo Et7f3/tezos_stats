@@ -1,5 +1,5 @@
 {
-  "checksum": "8cc5835e69188392b011b4c65b594f65",
+  "checksum": "2cfadd01573bfc52a480b28db979283e",
   "root": "tezos_stats_backend@link-dev:./host.json",
   "node": {
     "tezos_stats_backend@link-dev:./host.json": {
@@ -13,6 +13,7 @@
         "ez-api@github:Et7f3/ez-api#f6d0359@d41d8cd9",
         "@opam/zarith@opam:1.7@1709d54c", "@opam/yojson@opam:1.7.0@7056d985",
         "@opam/pgocaml@github:Et7f3/pgocaml:pgocaml.opam#7eb25fd07b66c1dc1b15e2e619a88f5d1d716aae@d41d8cd9",
+        "@opam/opium@opam:0.17.1@c0266e64",
         "@opam/ocplib-json-typed@opam:0.7.1@7d28a333",
         "@opam/dune@opam:1.11.0@9ec4211e"
       ],
@@ -981,6 +982,96 @@
         "@opam/dune@opam:1.11.0@9ec4211e", "@opam/base@opam:v0.12.2@4eee02b5"
       ]
     },
+    "@opam/opium_kernel@opam:0.17.1@cc96478b": {
+      "id": "@opam/opium_kernel@opam:0.17.1@cc96478b",
+      "name": "@opam/opium_kernel",
+      "version": "opam:0.17.1",
+      "source": {
+        "type": "install",
+        "source": [
+          "archive:https://opam.ocaml.org/cache/md5/37/37bc9bffd5fad51a343b7ff202df637b#md5:37bc9bffd5fad51a343b7ff202df637b",
+          "archive:https://github.com/rgrinberg/opium/releases/download/v0.17.1/opium-v0.17.1.tbz#md5:37bc9bffd5fad51a343b7ff202df637b"
+        ],
+        "opam": {
+          "name": "opium_kernel",
+          "version": "0.17.1",
+          "path": "host.esy.lock/opam/opium_kernel.0.17.1"
+        }
+      },
+      "overrides": [],
+      "dependencies": [
+        "ocaml@4.7.1004@d41d8cd9", "@opam/sexplib@opam:v0.12.0@7033807f",
+        "@opam/re@opam:1.9.0@fc2ceb05",
+        "@opam/ppx_sexp_conv@opam:v0.12.0@6e30d275",
+        "@opam/ppx_fields_conv@opam:v0.12.0@2d8ce62e",
+        "@opam/lwt@opam:4.2.1@08ba7e51", "@opam/hmap@opam:0.8.1@87a77ebe",
+        "@opam/fieldslib@opam:v0.12.0@5f543501",
+        "@opam/ezjsonm@opam:1.1.0@931c9c3e",
+        "@opam/dune@opam:1.11.0@9ec4211e",
+        "@opam/cohttp-lwt@opam:2.2.0@e41e198d",
+        "@opam/cohttp@opam:2.2.0@ff5a1904",
+        "@opam/base64@opam:3.2.0@6303aa3a",
+        "@esy-ocaml/substs@0.0.1@d41d8cd9"
+      ],
+      "devDependencies": [
+        "ocaml@4.7.1004@d41d8cd9", "@opam/sexplib@opam:v0.12.0@7033807f",
+        "@opam/re@opam:1.9.0@fc2ceb05",
+        "@opam/ppx_sexp_conv@opam:v0.12.0@6e30d275",
+        "@opam/ppx_fields_conv@opam:v0.12.0@2d8ce62e",
+        "@opam/lwt@opam:4.2.1@08ba7e51", "@opam/hmap@opam:0.8.1@87a77ebe",
+        "@opam/fieldslib@opam:v0.12.0@5f543501",
+        "@opam/ezjsonm@opam:1.1.0@931c9c3e",
+        "@opam/dune@opam:1.11.0@9ec4211e",
+        "@opam/cohttp-lwt@opam:2.2.0@e41e198d",
+        "@opam/cohttp@opam:2.2.0@ff5a1904",
+        "@opam/base64@opam:3.2.0@6303aa3a"
+      ]
+    },
+    "@opam/opium@opam:0.17.1@c0266e64": {
+      "id": "@opam/opium@opam:0.17.1@c0266e64",
+      "name": "@opam/opium",
+      "version": "opam:0.17.1",
+      "source": {
+        "type": "install",
+        "source": [
+          "archive:https://opam.ocaml.org/cache/md5/37/37bc9bffd5fad51a343b7ff202df637b#md5:37bc9bffd5fad51a343b7ff202df637b",
+          "archive:https://github.com/rgrinberg/opium/releases/download/v0.17.1/opium-v0.17.1.tbz#md5:37bc9bffd5fad51a343b7ff202df637b"
+        ],
+        "opam": {
+          "name": "opium",
+          "version": "0.17.1",
+          "path": "host.esy.lock/opam/opium.0.17.1"
+        }
+      },
+      "overrides": [],
+      "dependencies": [
+        "ocaml@4.7.1004@d41d8cd9", "@opam/stringext@opam:1.6.0@104bc94b",
+        "@opam/re@opam:1.9.0@fc2ceb05",
+        "@opam/ppx_sexp_conv@opam:v0.12.0@6e30d275",
+        "@opam/ppx_fields_conv@opam:v0.12.0@2d8ce62e",
+        "@opam/opium_kernel@opam:0.17.1@cc96478b",
+        "@opam/magic-mime@opam:1.1.1@1370cc6f",
+        "@opam/lwt@opam:4.2.1@08ba7e51", "@opam/logs@opam:0.6.3@80c08d15",
+        "@opam/dune@opam:1.11.0@9ec4211e",
+        "@opam/cohttp-lwt-unix@opam:2.2.0@2bb1d74c",
+        "@opam/cmdliner@opam:1.0.4@93208aac",
+        "@opam/base-unix@opam:base@87d0b2eb",
+        "@esy-ocaml/substs@0.0.1@d41d8cd9"
+      ],
+      "devDependencies": [
+        "ocaml@4.7.1004@d41d8cd9", "@opam/stringext@opam:1.6.0@104bc94b",
+        "@opam/re@opam:1.9.0@fc2ceb05",
+        "@opam/ppx_sexp_conv@opam:v0.12.0@6e30d275",
+        "@opam/ppx_fields_conv@opam:v0.12.0@2d8ce62e",
+        "@opam/opium_kernel@opam:0.17.1@cc96478b",
+        "@opam/magic-mime@opam:1.1.1@1370cc6f",
+        "@opam/lwt@opam:4.2.1@08ba7e51", "@opam/logs@opam:0.6.3@80c08d15",
+        "@opam/dune@opam:1.11.0@9ec4211e",
+        "@opam/cohttp-lwt-unix@opam:2.2.0@2bb1d74c",
+        "@opam/cmdliner@opam:1.0.4@93208aac",
+        "@opam/base-unix@opam:base@87d0b2eb"
+      ]
+    },
     "@opam/omd@opam:1.3.1@a0702cc6": {
       "id": "@opam/omd@opam:1.3.1@a0702cc6",
       "name": "@opam/omd",
@@ -1784,6 +1875,31 @@
         "@opam/base-unix@opam:base@87d0b2eb",
         "@opam/base-bytes@opam:base@19d0c2ff"
       ]
+    },
+    "@opam/hmap@opam:0.8.1@87a77ebe": {
+      "id": "@opam/hmap@opam:0.8.1@87a77ebe",
+      "name": "@opam/hmap",
+      "version": "opam:0.8.1",
+      "source": {
+        "type": "install",
+        "source": [
+          "archive:https://opam.ocaml.org/cache/md5/04/04169252265a11d852e1547445177196#md5:04169252265a11d852e1547445177196",
+          "archive:http://erratique.ch/software/hmap/releases/hmap-0.8.1.tbz#md5:04169252265a11d852e1547445177196"
+        ],
+        "opam": {
+          "name": "hmap",
+          "version": "0.8.1",
+          "path": "host.esy.lock/opam/hmap.0.8.1"
+        }
+      },
+      "overrides": [],
+      "dependencies": [
+        "ocaml@4.7.1004@d41d8cd9", "@opam/topkg@opam:1.0.1@a42c631e",
+        "@opam/ocamlfind@opam:1.8.1@c65fe06a",
+        "@opam/ocamlbuild@opam:0.14.0@427a2331",
+        "@esy-ocaml/substs@0.0.1@d41d8cd9"
+      ],
+      "devDependencies": [ "ocaml@4.7.1004@d41d8cd9" ]
     },
     "@opam/hex@opam:1.4.0@96b78cfa": {
       "id": "@opam/hex@opam:1.4.0@96b78cfa",
