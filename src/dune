@@ -2,9 +2,7 @@
  (name main)
  (public_name main)
  (libraries ez-api ez-api-cohttp ocplib_tezos Yojson))
- (package tezos_stats)
 
 (install
   (section bin)
-  (package tezos_stats)
   (files config.json))
