@@ -1,24 +1,25 @@
+(* init db *)
+let dbh = PGOCaml.connect ()
+
+(*let () = [%pgsql dbh "execute" "DROP TABLE scan"]*)
+
 let () =
-  let dbh = PGOCaml.connect () in
-  let insert name salary =
-    [%pgsql dbh "insert into employees (name, salary) VALUES ($name, $salary)"]
-  in
-  ignore(insert "Chris" 1_000.0);
-  let get name =
-    [%pgsql dbh "select salary from employees where name = $name"]
-  in
-  let () = [%pgsql dbh
-                     "execute"
-                     "CREATE TEMP TABLE IF NOT EXISTS employees (
-        name TEXT PRIMARY KEY,
-        salary FLOAT)"]
-  in
-  let name = "Chris" in
-  let salary = get name
-               |> List.hd
-               |> function
-               | Some(x) -> x
-               | None -> raise(Failure "The database is probably broken.")
-  in
-  Printf.printf "%s's salary is %.02f\n" name salary;
-  PGOCaml.close(dbh)
+  [%pgsql dbh
+            "execute"
+            "CREATE TABLE IF NOT EXISTS scan (
+      name TEXT PRIMARY KEY,
+      head_level INT,
+      head_time TIMESTAMP,
+      head_hash CHAR(60),
+      peers INT,
+      version TEXT,
+      in_flaw INT,
+      out_flaw INT,
+      build_commit TEXT,
+      build_branch TEXT,
+      build_date DATE,
+      checkpoint_type TEXT)"]
+
+let () = print_endline "e"
+
+let dbh = PGOCaml.close(dbh)

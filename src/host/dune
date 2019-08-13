@@ -1,5 +1,6 @@
 (executable
  (name host)
  (public_name host)
- (libraries pgocaml)
+ (package host)
+ (libraries pgocaml ocplib-json-typed)
  (preprocess (pps pgocaml.ppx)))
