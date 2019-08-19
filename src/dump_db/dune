@@ -1,0 +1,4 @@
+(executable
+ (name dump_db)
+ (libraries pgocaml)
+ (preprocess (pps pgocaml.ppx)))

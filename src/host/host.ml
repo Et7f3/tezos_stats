@@ -27,20 +27,20 @@ let () = Random.self_init ()
 (* init db *)
 let dbh = PGOCaml.connect ()
 
-(*let () = [%pgsql dbh "execute" "DROP TABLE scan"]*)
+(*let () = [%pgsql dbh "execute" "DROP TABLE IF EXISTS scan"]*)
 
 let () =
   [%pgsql dbh
             "execute"
             "CREATE TABLE IF NOT EXISTS scan (
       name TEXT PRIMARY KEY,
-      head_level INT,
+      head_level INT DEFAULT 0,
       head_time TIMESTAMP,
       head_hash CHAR(60),
-      peers INT,
+      peers INT NOT NULL DEFAULT 0,
       version TEXT,
-      in_flaw INT,
-      out_flaw INT,
+      in_flaw INT NOT NULL DEFAULT 0,
+      out_flaw INT NOT NULL DEFAULT 0,
       build_commit TEXT,
       build_branch TEXT,
       build_date DATE,
@@ -50,9 +50,9 @@ let () =
   [%pgsql dbh
             "execute"
             "CREATE TABLE IF NOT EXISTS register (
-      name TEXT PRIMARY KEY,
-      token TEXT,
-      register_date TIMESTAMP)"]
+      name TEXT PRIMARY KEY NOT NULL,
+      token TEXT NOT NULL,
+      register_date TIMESTAMP NOT NULL)"]
 
 let () = Sys.catch_break true
 

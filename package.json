@@ -5,7 +5,8 @@
   "main": "node.js",
   "scripts": {
     "test": "echo no test",
-    "run": "esy x main"
+    "run": "esy x main",
+    "dump_db": "esy @host b dune exec src/dump_db/dump_db"
   },
   "repository": {
     "type": "git",
