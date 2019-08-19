@@ -57,7 +57,7 @@ let generate_crawler_URL root url_name url inital_value encoding error delay
     match error with
       Some error -> error
     | None ->
-      (fun i -> function
+      (fun _i -> function
            Some s -> Printf.eprintf "A request has failed with error n: %s" s
          | None -> Printf.eprintf "A request has failed with error n")
   and ret, _resolver = Lwt.wait ()

@@ -1,6 +1,29 @@
 open Opium.Std
 open Main_to_db
 
+
+let answer ?data ?error encoding =
+  respond' (`Json (answer ?data ?error encoding))
+
+let destruct encoding req f =
+  let req =
+    Lwt.catch (fun () -> App.json_of_body_exn req)
+      (fun error ->
+         let _ =
+           Lwt_io.eprintf "JSON not a array or object\r\n%s\r\n"
+             (Printexc.to_string error)
+         in Lwt.fail error)
+  in let req = (req :> Json_repr.ezjsonm Lwt.t) in
+  Lwt.bind req (fun json ->
+                 try
+                   f (Json_encoding.destruct encoding json)
+                 with error ->
+                   let error = Printexc.to_string error in
+                   let _ = Lwt_io.eprintf "%s\r\n" error in
+                   answer ~error:"Bad JSON Value" error_json_encoding)
+
+let () = Random.self_init ()
+
 (* init db *)
 let dbh = PGOCaml.connect ()
 
@@ -39,17 +62,24 @@ let () =
        let () = print_endline "We close handle to DB" in
        PGOCaml.close dbh |> ignore)
 
+let register _id =
+  let alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" in
+  let token = Bytes.init 42 (fun _ -> alphabet.[Random.int 62]) in
+  let token = Bytes.to_string token in
+  answer ~data:token
+
 let register =
-  get "/register" begin fun _req ->
-    `String (ok ()) |> respond'
+  post "/register" begin fun req ->
+    destruct register_encoding req (fun id -> register id token_encoding)
   end
 
 let shutdown_server =
   get "/stop/:host_password" begin fun req ->
     if param req "host_password" = Sys.getenv "host_password" then
-      exit 0
+      let shut = answer ~data:true shutdown_encoding in
+      Lwt.bind shut (fun _ -> exit 0)
     else
-      `String (error "Unauthorized") |> respond'
+      answer ~error:"Unauthorized" shutdown_encoding
   end
 
 let a =
