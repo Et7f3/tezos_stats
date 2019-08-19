@@ -24,9 +24,9 @@ dev-repo: "git+https://github.com/mirage/ocaml-conduit.git"
 synopsis: "A portable network connection establishment library using Lwt"
 url {
   src:
-    "https://github.com/mirage/ocaml-conduit/releases/download/v1.5.0/conduit-v1.5.0.tbz"
+    "https://github.com/mirage/ocaml-conduit/releases/download/v2.0.0/conduit-v2.0.0.tbz"
   checksum: [
-    "sha256=06b6476ba4d8caf4cbfccbf7fd181cb2e5fe459e5e8e4992617fd2d7bebcbfd1"
-    "sha512=8bddae1a238d58d1b59520afb4f627c4beaf9b5355cacc4087e6667e678392cbc681777e32874ee033ffe40da8a7f0d3bab38eed64f25d201294a9c3e3476978"
+    "sha256=d973a5c3b49b2529d50016daa9cc9c35413c75f1d9c62f363ae416e51e3a8aa5"
+    "sha512=ae80a1f0593d8a8fef9c5f7d794f2312f9665459ebbc94f68c957cedaf93100320f9e8f373af95d4b9c34780b34744683ab08c5544f1f8efc355e557f6c9ad9d"
   ]
 }

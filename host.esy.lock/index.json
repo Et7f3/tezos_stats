@@ -1,5 +1,5 @@
 {
-  "checksum": "b29b9e2b555a103b23b89e6906c88685",
+  "checksum": "cc2e951b90dae36633057ee467882654",
   "root": "tezos_stats@link-dev:./package.json",
   "node": {
     "tezos_stats@link-dev:./package.json": {
@@ -18,6 +18,7 @@
         "@opam/pgocaml@github:Et7f3/pgocaml:pgocaml.opam#7eb25fd07b66c1dc1b15e2e619a88f5d1d716aae@d41d8cd9",
         "@opam/opium@opam:0.17.1@c0266e64",
         "@opam/ocplib-json-typed@opam:0.7.1@7d28a333",
+        "@opam/ezjsonm@opam:1.1.0@931c9c3e",
         "@opam/ez-api@github:Et7f3/ez-api#02242df@d41d8cd9",
         "@opam/dune@opam:1.11.0@9ec4211e"
       ],
@@ -1007,7 +1008,7 @@
         "@opam/magic-mime@opam:1.1.2@980f82fb",
         "@opam/lwt@opam:4.2.1@08ba7e51", "@opam/logs@opam:0.7.0@1d03143e",
         "@opam/dune@opam:1.11.0@9ec4211e",
-        "@opam/cohttp-lwt-unix@opam:2.2.0@2bb1d74c",
+        "@opam/cohttp-lwt-unix@opam:2.2.0@2de64ab5",
         "@opam/cmdliner@opam:1.0.4@93208aac",
         "@opam/base-unix@opam:base@87d0b2eb",
         "@esy-ocaml/substs@0.0.1@d41d8cd9"
@@ -1021,7 +1022,7 @@
         "@opam/magic-mime@opam:1.1.2@980f82fb",
         "@opam/lwt@opam:4.2.1@08ba7e51", "@opam/logs@opam:0.7.0@1d03143e",
         "@opam/dune@opam:1.11.0@9ec4211e",
-        "@opam/cohttp-lwt-unix@opam:2.2.0@2bb1d74c",
+        "@opam/cohttp-lwt-unix@opam:2.2.0@2de64ab5",
         "@opam/cmdliner@opam:1.0.4@93208aac",
         "@opam/base-unix@opam:base@87d0b2eb"
       ]
@@ -2016,7 +2017,7 @@
         "@opam/js_of_ocaml@opam:3.4.0@d8a98a2c",
         "@opam/ipaddr@opam:2.9.0@be03efc3",
         "@opam/ezjsonm@opam:1.1.0@931c9c3e",
-        "@opam/cohttp-lwt-unix@opam:2.2.0@2bb1d74c",
+        "@opam/cohttp-lwt-unix@opam:2.2.0@2de64ab5",
         "@opam/cohttp-lwt@opam:2.2.0@e41e198d",
         "@opam/calendar@opam:2.04@5110954c",
         "@opam/base64@opam:3.2.0@6303aa3a"
@@ -2262,7 +2263,7 @@
         "@opam/ppx_sexp_conv@opam:v0.12.0@6e30d275",
         "@opam/lwt@opam:4.2.1@08ba7e51", "@opam/ipaddr@opam:2.9.0@be03efc3",
         "@opam/dune@opam:1.11.0@9ec4211e",
-        "@opam/conduit-lwt@opam:1.5.0@d913ef72",
+        "@opam/conduit-lwt@opam:2.0.0@e9f5cffa",
         "@opam/base-unix@opam:base@87d0b2eb",
         "@esy-ocaml/substs@0.0.1@d41d8cd9"
       ],
@@ -2271,24 +2272,24 @@
         "@opam/ppx_sexp_conv@opam:v0.12.0@6e30d275",
         "@opam/lwt@opam:4.2.1@08ba7e51", "@opam/ipaddr@opam:2.9.0@be03efc3",
         "@opam/dune@opam:1.11.0@9ec4211e",
-        "@opam/conduit-lwt@opam:1.5.0@d913ef72",
+        "@opam/conduit-lwt@opam:2.0.0@e9f5cffa",
         "@opam/base-unix@opam:base@87d0b2eb"
       ]
     },
-    "@opam/conduit-lwt@opam:1.5.0@d913ef72": {
-      "id": "@opam/conduit-lwt@opam:1.5.0@d913ef72",
+    "@opam/conduit-lwt@opam:2.0.0@e9f5cffa": {
+      "id": "@opam/conduit-lwt@opam:2.0.0@e9f5cffa",
       "name": "@opam/conduit-lwt",
-      "version": "opam:1.5.0",
+      "version": "opam:2.0.0",
       "source": {
         "type": "install",
         "source": [
-          "archive:https://opam.ocaml.org/cache/sha256/06/06b6476ba4d8caf4cbfccbf7fd181cb2e5fe459e5e8e4992617fd2d7bebcbfd1#sha256:06b6476ba4d8caf4cbfccbf7fd181cb2e5fe459e5e8e4992617fd2d7bebcbfd1",
-          "archive:https://github.com/mirage/ocaml-conduit/releases/download/v1.5.0/conduit-v1.5.0.tbz#sha256:06b6476ba4d8caf4cbfccbf7fd181cb2e5fe459e5e8e4992617fd2d7bebcbfd1"
+          "archive:https://opam.ocaml.org/cache/sha256/d9/d973a5c3b49b2529d50016daa9cc9c35413c75f1d9c62f363ae416e51e3a8aa5#sha256:d973a5c3b49b2529d50016daa9cc9c35413c75f1d9c62f363ae416e51e3a8aa5",
+          "archive:https://github.com/mirage/ocaml-conduit/releases/download/v2.0.0/conduit-v2.0.0.tbz#sha256:d973a5c3b49b2529d50016daa9cc9c35413c75f1d9c62f363ae416e51e3a8aa5"
         ],
         "opam": {
           "name": "conduit-lwt",
-          "version": "1.5.0",
-          "path": "host.esy.lock/opam/conduit-lwt.1.5.0"
+          "version": "2.0.0",
+          "path": "host.esy.lock/opam/conduit-lwt.2.0.0"
         }
       },
       "overrides": [],
@@ -2345,8 +2346,8 @@
         "@opam/astring@opam:0.8.3@4e5e17d5"
       ]
     },
-    "@opam/cohttp-lwt-unix@opam:2.2.0@2bb1d74c": {
-      "id": "@opam/cohttp-lwt-unix@opam:2.2.0@2bb1d74c",
+    "@opam/cohttp-lwt-unix@opam:2.2.0@2de64ab5": {
+      "id": "@opam/cohttp-lwt-unix@opam:2.2.0@2de64ab5",
       "name": "@opam/cohttp-lwt-unix",
       "version": "opam:2.2.0",
       "source": {
