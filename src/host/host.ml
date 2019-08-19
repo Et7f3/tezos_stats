@@ -62,11 +62,23 @@ let () =
        let () = print_endline "We close handle to DB" in
        PGOCaml.close dbh |> ignore)
 
-let register _id =
-  let alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" in
-  let token = Bytes.init 42 (fun _ -> alphabet.[Random.int 62]) in
-  let token = Bytes.to_string token in
-  answer ~data:token
+let get_token name =
+  [%pgsql dbh "SELECT token FROM register where name = $name"]
+
+let register id =
+  let registered_token = get_token id in
+  match List.length registered_token with
+    0 ->
+    let alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" in
+    let token = Bytes.init 42 (fun _ -> alphabet.[Random.int 62]) in
+    let token = Bytes.to_string token in
+    let () =
+      (* we shouldn't have to try..with *)
+      [%pgsql dbh "INSERT INTO register (name, token, register_date)
+                                 VALUES ($id, $token, NOW())"]
+    in answer ~data:token ?error:None
+  | 1 -> answer ?data:None ~error:"Already registered"
+  | _ -> answer ?data:None ~error:"Something went wrong"
 
 let register =
   post "/register" begin fun req ->
