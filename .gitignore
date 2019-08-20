@@ -1,4 +1,5 @@
 node_modules
 _esy
 *.install
+pre_post_commit_log
 .merlin
