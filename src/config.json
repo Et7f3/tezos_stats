@@ -1,10 +1,5 @@
 {
-  "nodes": [
-    {
-      "token": "",
-      "target": "http://tz.alphanet.tzscan.io"
-    }
-  ],
-  "delay_head": 10,
-  "delay_peers": 60
+  "nodes": [{
+    "target": "http://tz.alphanet.tzscan.io"
+  }]
 }

@@ -11,32 +11,42 @@ type config =
     delay_peers: float;
   }
 
-let read_config config_file =
-  let yojson = Yojson.Safe.from_file ~fname:"config" config_file in
-  let ezjsonm = Json_repr.from_yojson yojson in
+let config_encoding =
+  let open Json_encoding in
   let node_encoding =
-    let open Json_encoding in
     conv (fun {token; target;} -> token, target)
       (fun (token, target) -> {token; target;})
       (obj2 (opt "token" string) (req "target" string))
   in let encoding =
-       let open Json_encoding in
        obj3 (req "nodes" (list node_encoding)) (dft "delay_head" float 10.)
          (dft "delay_peers" float 60.)
-  in let nodes, delay_head, delay_peers =
-       Json_encoding.destruct encoding ezjsonm
-  in {
-    nodes;
-    delay_head;
-    delay_peers;
-  }
+  in
+  conv
+    (fun {nodes; delay_head; delay_peers;} -> nodes, delay_head, delay_peers)
+    (fun (nodes, delay_head, delay_peers) -> {nodes; delay_head; delay_peers;})
+    encoding
 
-let config =
+let read_config config_file =
+  let yojson = Yojson.Safe.from_file ~fname:"config" config_file in
+  let ezjsonm = Json_repr.from_yojson yojson in
+  Json_encoding.destruct config_encoding ezjsonm
+
+let config, config_path =
   try
-    read_config "config.json"
+    let path = "config.json" in
+    read_config path, path
   with
   (* hack during development *)
-  | _ -> read_config "src/config.json"
+  | _ ->
+    let path = "src/config.json" in
+    read_config path, path
+
+let write_config () =
+  let ezjsonm = Json_encoding.construct config_encoding config in
+  let yojson = Json_repr.to_yojson ezjsonm in
+  Yojson.Safe.to_file config_path yojson
+
+let () = write_config ()
 
 let fetch msg delay =
   Printf.printf "We will fetch %s every %f second%s" msg delay
