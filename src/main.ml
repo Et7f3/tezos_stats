@@ -21,18 +21,10 @@ let read_config config_file =
       (obj2 (opt "token" string) (req "target" string))
   in let encoding =
        let open Json_encoding in
-       obj3 (req "nodes" (list node_encoding)) (opt "delay_head" float)
-         (opt "delay_peers" float)
+       obj3 (req "nodes" (list node_encoding)) (dft "delay_head" float 10.)
+         (dft "delay_peers" float 60.)
   in let nodes, delay_head, delay_peers =
        Json_encoding.destruct encoding ezjsonm
-  in let delay_head =
-       match delay_head with
-         Some delay_head -> delay_head
-       | None -> 10.
-  in let delay_peers =
-       match delay_peers with
-         Some delay_peers -> delay_peers
-       | None -> 60.
   in {
     nodes;
     delay_head;
