@@ -1,7 +1,8 @@
 type node =
   {
-    token : string option;
+    mutable token : string option;
     target : string;
+    mutable wait_token : string Lwt.t;
   }
 
 type config =
@@ -11,11 +12,56 @@ type config =
     delay_peers: float;
   }
 
+let save_config = ref (fun () -> failwith "NullPointerException")
+
+let destruct encoding data =
+  let yojson = Yojson.Safe.from_string data in
+  let ezjsonm = Json_repr.from_yojson yojson in
+  Json_encoding.destruct encoding ezjsonm
+
+let register_for_token ({token; target; wait_token = _} as node) =
+  match token with
+    Some token -> Lwt.return token
+  | None ->
+    let ret, resolver = Lwt.task () in
+    let () =
+      EzCohttp.post ~content_type:"application/json"
+        ~content:Main_to_db.(ask register_encoding target)
+        ("register " ^ target)
+        (EzAPI.TYPES.URL "http://127.0.0.1:9000/register")
+        (fun s ->
+           let data, error = destruct Main_to_db.token_encoding s in
+           match data with
+             Some token ->
+             let () =
+               match error with
+                 None -> ()
+               | Some error ->
+                 let () = Printf.eprintf "Errors: %s" error in
+                 flush stderr
+             in
+             let () = node.token <- Some token in
+             let () = !save_config () in
+             Lwt.wakeup resolver token
+           | None ->
+             match error with
+               None ->
+               Lwt.wakeup_later_result resolver
+                 (Error (Failure ("No token for target" ^ target)))
+             | Some error ->
+               Lwt.wakeup_later_result resolver (Error (Failure error)))
+    in ret
+
+let dummy_string_lwt = Lwt.return ""
+
 let config_encoding =
   let open Json_encoding in
   let node_encoding =
-    conv (fun {token; target;} -> token, target)
-      (fun (token, target) -> {token; target;})
+    conv (fun {token; target; wait_token = _} -> token, target)
+      (fun (token, target) ->
+         let ret = {token; target; wait_token = dummy_string_lwt} in
+         let () = ret.wait_token <- register_for_token ret in
+         ret)
       (obj2 (opt "token" string) (req "target" string))
   in let encoding =
        obj3 (req "nodes" (list node_encoding)) (dft "delay_head" float 10.)
@@ -54,16 +100,13 @@ let write_config () =
   let yojson = Json_repr.to_yojson ezjsonm in
   Yojson.Safe.to_file config_path yojson
 
+let () = save_config := write_config
+
 let () = write_config ()
 
 let fetch msg delay =
   Printf.printf "We will fetch %s every %f second%s" msg delay
     (if delay > 2. then "s\n" else "\n")
-
-let destruct encoding data =
-  let yojson = Yojson.Safe.from_string data in
-  let ezjsonm = Json_repr.from_yojson yojson in
-  Json_encoding.destruct encoding ezjsonm
 
 let () = print_endline "config loaded"
 let () =
