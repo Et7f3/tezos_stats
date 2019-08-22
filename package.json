@@ -20,14 +20,16 @@
   "author": "BRAMI Élie <elie.brami@epita.fr>",
   "license": "SEE LICENSE IN LICENSE",
   "dependencies": {
-    "@opam/dune": "1.11.0",
+    "@opam/dune": "1.11.2",
     "@opam/ezjsonm": "1.1.0",
     "@opam/ocplib-json-typed": "0.7.1",
     "@opam/opium": "0.17.1",
     "@opam/pgocaml": "github:Et7f3/pgocaml:pgocaml.opam#dunify",
+    "@opam/utop": "2.4.0",
     "@opam/yojson": "1.7.0",
     "@opam/zarith": "1.7",
     "@opam/ez-api": "*",
+    "reason-react": "^0.7.0",
     "ocaml": "^4.7.1004"
   },
   "esy": {
