@@ -16,7 +16,7 @@
       "PGHOST": "127.0.0.1",
       "LOCALPORT": "9000",
       "host_password": "ANOTHER_DUMMY_PASSWORD",
-      "PGPASSWORD": "DUMMY_PASSWORD"
+      "PGPASSWORD": "#{$APPVEYOR == 'True' ? 'Password12!' : 'DUMMY_PASSWORD'}"
     }
   }
 }
