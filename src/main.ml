@@ -160,8 +160,18 @@ let peek_head node_config =
 
 let peek_peers node_config =
   let print_peers num =
-    Printf.printf "%s as %d active or running peer%s" node_config.target num
-      (if num > 2 then "s\n" else "\n")
+    let token =
+      match node_config.token with
+        Some token -> token
+      | None -> assert false
+    in let () =
+         EzCohttp.post ~content_type:"application/json"
+           ~content:Main_to_db.(ask peers_encoding num)
+           ("peers " ^ (string_of_int num))
+           (EzAPI.TYPES.URL "http://127.0.0.1:9000/tezos/peers")
+           ~headers:["db_token", token] (fun _ -> ())
+    in Printf.printf "%s as %d active or running peer%s" node_config.target
+         num (if num > 2 then "s\n" else "\n")
   in generate_crawler_URL node_config.target "peek_peers"
        "/network/peers" ~-1
        (Ocplib_tezos.Tezos_encoding.Encoding.Network.encoding) None

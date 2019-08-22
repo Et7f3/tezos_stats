@@ -22,6 +22,14 @@ let destruct encoding req f =
                    let _ = Lwt_io.eprintf "%s\r\n" error in
                    answer ~error:"Bad JSON Value" error_json_encoding)
 
+let header req hd f =
+  let headers = Request.headers req in
+  match Cohttp.Header.get headers hd with
+    Some hd -> f hd
+  | None ->
+    answer ~error:(Printf.sprintf "Header %s is missing" hd)
+      error_json_encoding
+
 let () = Random.self_init ()
 
 (* init db *)
@@ -85,6 +93,24 @@ let register =
     destruct register_encoding req (fun id -> register id token_encoding)
   end
 
+let peers tok nb_peers =
+  let nb_peers = Int32.of_int nb_peers in
+  try
+    let () =
+      [%pgsql dbh "INSERT INTO scan (name, peers)
+                             VALUES ((SELECT name FROM register
+                                      WHERE TOKEN = $tok), $nb_peers)"]
+    in answer ~data:() ?error:None
+  with _ -> answer ?data:None ~error:"Something went wrong"
+
+let peers =
+  post "/tezos/peers" begin fun req ->
+    header req "db_token"
+      (fun tok ->
+         destruct peers_encoding req
+           (fun nb_peers -> peers tok nb_peers res_head_encoding))
+  end
+
 let shutdown_server =
   get "/stop/:host_password" begin fun req ->
     if param req "host_password" = Sys.getenv "host_password" then
@@ -97,6 +123,7 @@ let shutdown_server =
 let a =
   App.empty
   |> register
+  |> peers
   |> shutdown_server
   |> App.run_command'
 

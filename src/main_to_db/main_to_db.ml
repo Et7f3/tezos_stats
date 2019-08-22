@@ -12,6 +12,18 @@ let register_encoding =
   let open Json_encoding in
   obj1 (req "to" string)
 
+let head_encoding =
+  let open Json_encoding in
+  obj1 (req "head" string)
+
+let res_head_encoding = answer_encoding Json_encoding.unit
+
+let peers_encoding =
+  let open Json_encoding in
+  obj1 (req "nb_peers" int)
+
+let res_peers_encoding = answer_encoding Json_encoding.unit
+
 let answer ?data ?error encoding =
   match Json_encoding.construct encoding (data, error) with
     (`A _ | `O _) as v -> v
