@@ -26,10 +26,18 @@ let config_encoding =
     (fun (nodes, delay_head, delay_peers) -> {nodes; delay_head; delay_peers;})
     encoding
 
-let read_config config_file =
-  let yojson = Yojson.Safe.from_file ~fname:"config" config_file in
-  let ezjsonm = Json_repr.from_yojson yojson in
-  Json_encoding.destruct config_encoding ezjsonm
+let read_config =
+  let already_read = ref false in
+  fun config_file ->
+    if not !already_read then
+      let yojson = Yojson.Safe.from_file ~fname:"config" config_file in
+      let ezjsonm = Json_repr.from_yojson yojson in
+      let ret = Json_encoding.destruct config_encoding ezjsonm in
+      let () = already_read := true in
+      ret
+    else
+      failwith ("The config is already loaded: You shouldn't reload it because"
+                ^ " it create Lwt value")
 
 let config, config_path =
   try
