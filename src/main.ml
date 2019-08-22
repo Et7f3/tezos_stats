@@ -116,7 +116,7 @@ let () = fetch "head" config.delay_head
 let () = fetch "peers" config.delay_peers
 
 let generate_crawler_URL root url_name url inital_value encoding error delay
-      action =
+      action wait_token =
   let last_value = ref inital_value
   and url = EzAPI.TYPES.URL (root ^ url)
   and error =
@@ -133,8 +133,12 @@ let generate_crawler_URL root url_name url inital_value encoding error delay
            EzCohttp.get url_name url ~error
              (fun s ->
                 let value = destruct encoding s in
-                let () = last_value := action !last_value value in
-                let sleep = Lwt_unix.sleep delay in
+                let wait_token =
+                  Lwt.map
+                    (fun tok -> last_value := action tok !last_value value)
+                    wait_token
+                in let sleep = Lwt_unix.sleep delay in
+                let sleep = Lwt.(<&>) sleep wait_token in
                 let _ = Lwt.bind sleep peek_URL in
                 ())
          in
@@ -146,12 +150,13 @@ let peek_head node_config =
   generate_crawler_URL node_config.target "peek_head"
     "/chains/main/blocks/head/hash" "" Json_encoding.string None
     config.delay_head
-    (function last_head ->
+    (function _token ->
+     function last_head ->
      function head ->
        let () =
          if last_head <> head then
            print_head head
-       in head)
+       in head) node_config.wait_token
 
 let peek_peers node_config =
   let print_peers num =
@@ -161,7 +166,8 @@ let peek_peers node_config =
        "/network/peers" ~-1
        (Ocplib_tezos.Tezos_encoding.Encoding.Network.encoding) None
        config.delay_peers
-       (function last_number_peers ->
+       (function _token ->
+        function last_number_peers ->
         function peers ->
           let peers =
             List.filter
@@ -170,7 +176,7 @@ let peek_peers node_config =
           let () =
             if last_number_peers <> num then
               print_peers num
-          in num)
+          in num) node_config.wait_token
 
 let peek_node node_config =
   Lwt.join [peek_head node_config; peek_peers node_config]
