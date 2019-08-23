@@ -3,4 +3,6 @@ _esy
 *.install
 pre_post_commit_log
 _build
+# to see if we need to change dependencies
+appveyor.esy.lock
 .merlin

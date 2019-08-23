@@ -39,7 +39,11 @@
     ],
     "install": [
       "esy-installer tezos_stats.install"
-    ]
+    ],
+    "buildEnv": {
+      "PGHOST": "127.0.0.1",
+      "PGPASSWORD": "DUMMY_PASSWORD"
+    }
   },
   "devDependencies": {
     "@opam/ocp-indent": "1.7.0",

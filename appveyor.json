@@ -1,0 +1,14 @@
+{
+  "name": "tezos_stats_appveyor",
+  "version": "0.0.0",
+  "description": "Define variable for appveyor.",
+  "source": "./package.json",
+  "override": {
+    "build": [
+      "dune build @all"
+    ],
+    "buildEnv": {
+      "PGPASSWORD": "Password12!"
+    }
+  }
+}
