@@ -1,0 +1,41 @@
+version: '1.0.{build}'
+
+image:
+  - Visual Studio 2019
+
+services:
+  - postgresql101
+
+configuration: Release
+
+platform:
+  - x64
+  - x86
+
+
+build: off
+
+branches:
+  only:
+    - master
+
+for:
+  - matrix:
+      only:
+        - image: Visual Studio 2019
+    clone_folder: 'C:\projects\tezos_stats'
+    cache:
+      - 'C:\Users\appveyor\.esy'
+      - 'C:\Users\appveyor\AppData\Roaming\npm\esy'
+    install:
+      - 'npm install -g esy@0.5.8'
+    build_script:
+      - esy @host install
+      - esy @host build echo $PGPASSWORD
+      - esy @host build
+
+clone_depth: 5
+
+test: off
+
+deploy: off
