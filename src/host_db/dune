@@ -1,0 +1,5 @@
+(executable
+ (name host_db)
+ (public_name host_db)
+ (libraries pgocaml opium main_to_db)
+ (preprocess (pps pgocaml.ppx)))

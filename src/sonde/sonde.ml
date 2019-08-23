@@ -92,7 +92,7 @@ let config, config_path =
   with
   (* hack during development *)
   | _ ->
-    let path = "src/config.json" in
+    let path = "src/sonde/config.json" in
     read_config path, path
 
 let write_config () =

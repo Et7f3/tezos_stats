@@ -5,8 +5,8 @@
   "main": "node.js",
   "scripts": {
     "test": "echo no test",
-    "run": "esy x main",
-    "dump_db": "esy @host b dune exec src/dump_db/dump_db"
+    "run": "esy x sonde",
+    "dump_db": "esy @host b dune exec src/dump_db/dump_db.exe"
   },
   "repository": {
     "type": "git",
@@ -39,11 +39,7 @@
     ],
     "install": [
       "esy-installer tezos_stats.install"
-    ],
-    "buildEnv": {
-      "PGHOST": "127.0.0.1",
-      "PGPASSWORD": "DUMMY_PASSWORD"
-    }
+    ]
   },
   "devDependencies": {
     "@opam/ocp-indent": "1.7.0",

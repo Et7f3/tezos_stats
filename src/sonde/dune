@@ -1,6 +1,6 @@
 (executable
- (name main)
- (public_name main)
+ (name sonde)
+ (public_name sonde)
  (libraries ez-api ez-api-cohttp ocplib_tezos Yojson main_to_db))
 
 (install
