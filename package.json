@@ -30,6 +30,7 @@
     "@opam/zarith": "1.7",
     "@opam/ez-api": "*",
     "reason-react": "^0.7.0",
+    "bs-ocplib-json-typed": "https://github.com/Et7f3/bs-ocplib-json-typed/tarball/master",
     "ocaml": "^4.7.1004"
   },
   "esy": {

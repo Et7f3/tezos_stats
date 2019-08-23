@@ -17,6 +17,12 @@ esy build
 
 Note: the first time it will build the OCaml compiler that take some time on windows please be patient. Next time dune only built file that is changed.
 
+
+install dev package (only one time)
+```
+npm install https://github.com/Et7f3/bs-ocplib-json-typed/tarball/master reason-react
+```
+
 install it locally (only one time)
 ```
 npm link bs-platform
