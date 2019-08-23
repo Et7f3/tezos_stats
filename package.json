@@ -33,6 +33,7 @@
     "ocaml": "^4.7.1004"
   },
   "esy": {
+    "buildsInSource": "_build",
     "build": [
       "dune build -p tezos_stats -j4"
     ],
