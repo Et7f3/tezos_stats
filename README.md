@@ -7,10 +7,19 @@ Tezos Stats is website that display statistics about the tezos blockchain.
 ## How to build
 
 After you have cloned or download this project
+Install the needed tool
+
 ```
-npm install -g esy
+npm install -g esy bs-platform
 esy install
 esy build
+```
+
+Note: the first time it will build the OCaml compiler that take some time on windows please be patient. Next time dune only built file that is changed.
+
+install it locally (only one time)
+```
+npm link bs-platform
 ```
 
 ## How to run

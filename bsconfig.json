@@ -1,0 +1,19 @@
+{
+  "name": "tezos_stats",
+  "version": "0.0.0",
+  "sources": {
+    "dir" : "src/web_client",
+    "subdirs" : true
+  },
+  "package-specs": {
+    "module": "commonjs"
+  },
+  "suffix": ".bs.js",
+  "bs-dependencies": [
+    "reason-react"
+  ],
+  "warnings": {
+    "error" : "+101"
+  },
+  "refmt": 3
+}
