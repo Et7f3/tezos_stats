@@ -35,6 +35,7 @@ To launch the sond exec `esy run`
 ## Todo
 - [ ] Frontend website
 - [ ] Frontend-backend communication
-- [ ] Reorganize files
+- [x] Reorganize files
 - [ ] Generate docs
 - [ ] Setup CI
+- [ ] Explain the structure of files/folders
