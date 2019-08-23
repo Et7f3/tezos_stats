@@ -6,6 +6,9 @@ image:
 services:
   - postgresql101
 
+environment:
+  APPVEYOR_RDP_PASSWORD: VERY_strong_PASSWORD
+
 configuration: Release
 
 platform:
@@ -30,6 +33,7 @@ for:
     install:
       - 'npm install -g esy@0.5.8'
     build_script:
+      - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
       - esy @host install
       - esy @host build echo $PGPASSWORD
       - esy @host build
