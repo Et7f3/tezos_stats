@@ -1,5 +1,5 @@
 {
-  "checksum": "dba5390e2fe7fb850787e2d978bffa0d",
+  "checksum": "33fe5eedb3a46dc913bff7ce2d9361fa",
   "root": "tezos_stats@link-dev:./package.json",
   "node": {
     "tezos_stats@link-dev:./package.json": {
@@ -15,6 +15,7 @@
       "dependencies": [
         "ocaml@4.7.1004@d41d8cd9", "@opam/zarith@opam:1.7@1709d54c",
         "@opam/yojson@opam:1.7.0@7056d985",
+        "@opam/websocket-lwt-unix@opam:2.13@53537d6b",
         "@opam/pgocaml@github:Et7f3/pgocaml:pgocaml.opam#7eb25fd07b66c1dc1b15e2e619a88f5d1d716aae@d41d8cd9",
         "@opam/opium@opam:0.17.1@c0266e64",
         "@opam/ocplib-json-typed@opam:0.7.1@7d28a333",
@@ -150,6 +151,74 @@
       "devDependencies": [
         "ocaml@4.7.1004@d41d8cd9", "@opam/easy-format@opam:1.3.2@0484b3c4",
         "@opam/dune@opam:1.11.2@81b81b31", "@opam/biniou@opam:1.2.1@d7570399"
+      ]
+    },
+    "@opam/websocket-lwt-unix@opam:2.13@53537d6b": {
+      "id": "@opam/websocket-lwt-unix@opam:2.13@53537d6b",
+      "name": "@opam/websocket-lwt-unix",
+      "version": "opam:2.13",
+      "source": {
+        "type": "install",
+        "source": [
+          "archive:https://opam.ocaml.org/cache/md5/d0/d0d07611c69250602c0ad9d7cddfae8e#md5:d0d07611c69250602c0ad9d7cddfae8e",
+          "archive:https://github.com/vbmithr/ocaml-websocket/releases/download/2.13/websocket-2.13.tbz#md5:d0d07611c69250602c0ad9d7cddfae8e"
+        ],
+        "opam": {
+          "name": "websocket-lwt-unix",
+          "version": "2.13",
+          "path": "host.esy.lock/opam/websocket-lwt-unix.2.13"
+        }
+      },
+      "overrides": [],
+      "dependencies": [
+        "ocaml@4.7.1004@d41d8cd9", "@opam/websocket@opam:2.13@5156d6cb",
+        "@opam/lwt_log@opam:1.1.1@91643f38",
+        "@opam/dune@opam:1.11.2@81b81b31",
+        "@opam/conduit-lwt-unix@opam:1.3.0@e0c019a3",
+        "@opam/cohttp-lwt-unix@opam:2.2.0@2de64ab5",
+        "@esy-ocaml/substs@0.0.1@d41d8cd9"
+      ],
+      "devDependencies": [
+        "ocaml@4.7.1004@d41d8cd9", "@opam/websocket@opam:2.13@5156d6cb",
+        "@opam/lwt_log@opam:1.1.1@91643f38",
+        "@opam/dune@opam:1.11.2@81b81b31",
+        "@opam/conduit-lwt-unix@opam:1.3.0@e0c019a3",
+        "@opam/cohttp-lwt-unix@opam:2.2.0@2de64ab5"
+      ]
+    },
+    "@opam/websocket@opam:2.13@5156d6cb": {
+      "id": "@opam/websocket@opam:2.13@5156d6cb",
+      "name": "@opam/websocket",
+      "version": "opam:2.13",
+      "source": {
+        "type": "install",
+        "source": [
+          "archive:https://opam.ocaml.org/cache/md5/d0/d0d07611c69250602c0ad9d7cddfae8e#md5:d0d07611c69250602c0ad9d7cddfae8e",
+          "archive:https://github.com/vbmithr/ocaml-websocket/releases/download/2.13/websocket-2.13.tbz#md5:d0d07611c69250602c0ad9d7cddfae8e"
+        ],
+        "opam": {
+          "name": "websocket",
+          "version": "2.13",
+          "path": "host.esy.lock/opam/websocket.2.13"
+        }
+      },
+      "overrides": [],
+      "dependencies": [
+        "ocaml@4.7.1004@d41d8cd9", "@opam/ocplib-endian@opam:1.0@aa720242",
+        "@opam/dune@opam:1.11.2@81b81b31",
+        "@opam/conduit@opam:1.3.0@91c842e1",
+        "@opam/cohttp@opam:2.3.0@d897c33c",
+        "@opam/base64@opam:3.2.0@6303aa3a",
+        "@opam/astring@opam:0.8.3@4e5e17d5",
+        "@esy-ocaml/substs@0.0.1@d41d8cd9"
+      ],
+      "devDependencies": [
+        "ocaml@4.7.1004@d41d8cd9", "@opam/ocplib-endian@opam:1.0@aa720242",
+        "@opam/dune@opam:1.11.2@81b81b31",
+        "@opam/conduit@opam:1.3.0@91c842e1",
+        "@opam/cohttp@opam:2.3.0@d897c33c",
+        "@opam/base64@opam:3.2.0@6303aa3a",
+        "@opam/astring@opam:0.8.3@4e5e17d5"
       ]
     },
     "@opam/uutf@opam:1.0.2@4440868f": {
@@ -1008,7 +1077,7 @@
         "@opam/magic-mime@opam:1.1.2@980f82fb",
         "@opam/lwt@opam:4.3.0@3f2cb6e0", "@opam/logs@opam:0.7.0@1d03143e",
         "@opam/dune@opam:1.11.2@81b81b31",
-        "@opam/cohttp-lwt-unix@opam:2.3.0@aa44730b",
+        "@opam/cohttp-lwt-unix@opam:2.2.0@2de64ab5",
         "@opam/cmdliner@opam:1.0.4@93208aac",
         "@opam/base-unix@opam:base@87d0b2eb",
         "@esy-ocaml/substs@0.0.1@d41d8cd9"
@@ -1022,7 +1091,7 @@
         "@opam/magic-mime@opam:1.1.2@980f82fb",
         "@opam/lwt@opam:4.3.0@3f2cb6e0", "@opam/logs@opam:0.7.0@1d03143e",
         "@opam/dune@opam:1.11.2@81b81b31",
-        "@opam/cohttp-lwt-unix@opam:2.3.0@aa44730b",
+        "@opam/cohttp-lwt-unix@opam:2.2.0@2de64ab5",
         "@opam/cmdliner@opam:1.0.4@93208aac",
         "@opam/base-unix@opam:base@87d0b2eb"
       ]
@@ -2020,7 +2089,7 @@
         "@opam/js_of_ocaml@opam:3.4.0@d8a98a2c",
         "@opam/ipaddr@opam:2.9.0@be03efc3",
         "@opam/ezjsonm@opam:1.1.0@931c9c3e",
-        "@opam/cohttp-lwt-unix@opam:2.3.0@aa44730b",
+        "@opam/cohttp-lwt-unix@opam:2.2.0@2de64ab5",
         "@opam/cohttp-lwt@opam:2.3.0@fa062975",
         "@opam/calendar@opam:2.04@5110954c",
         "@opam/base64@opam:3.2.0@6303aa3a"
@@ -2349,20 +2418,20 @@
         "@opam/astring@opam:0.8.3@4e5e17d5"
       ]
     },
-    "@opam/cohttp-lwt-unix@opam:2.3.0@aa44730b": {
-      "id": "@opam/cohttp-lwt-unix@opam:2.3.0@aa44730b",
+    "@opam/cohttp-lwt-unix@opam:2.2.0@2de64ab5": {
+      "id": "@opam/cohttp-lwt-unix@opam:2.2.0@2de64ab5",
       "name": "@opam/cohttp-lwt-unix",
-      "version": "opam:2.3.0",
+      "version": "opam:2.2.0",
       "source": {
         "type": "install",
         "source": [
-          "archive:https://opam.ocaml.org/cache/sha256/f1/f179ec35d00ecc57e8326fb11de5f6a769ee49ecd0dffacce6530f0695297125#sha256:f179ec35d00ecc57e8326fb11de5f6a769ee49ecd0dffacce6530f0695297125",
-          "archive:https://github.com/mirage/ocaml-cohttp/releases/download/v2.3.0/cohttp-v2.3.0.tbz#sha256:f179ec35d00ecc57e8326fb11de5f6a769ee49ecd0dffacce6530f0695297125"
+          "archive:https://opam.ocaml.org/cache/sha256/7b/7b504359cfaa8d02ffdf1e2d03100ea9d1d552defeb3679e99960196ac2cea29#sha256:7b504359cfaa8d02ffdf1e2d03100ea9d1d552defeb3679e99960196ac2cea29",
+          "archive:https://github.com/mirage/ocaml-cohttp/releases/download/v2.2.0/cohttp-v2.2.0.tbz#sha256:7b504359cfaa8d02ffdf1e2d03100ea9d1d552defeb3679e99960196ac2cea29"
         ],
         "opam": {
           "name": "cohttp-lwt-unix",
-          "version": "2.3.0",
-          "path": "host.esy.lock/opam/cohttp-lwt-unix.2.3.0"
+          "version": "2.2.0",
+          "path": "host.esy.lock/opam/cohttp-lwt-unix.2.2.0"
         }
       },
       "overrides": [],

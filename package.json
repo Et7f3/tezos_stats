@@ -27,6 +27,7 @@
     "@opam/ocplib-json-typed": "0.7.1",
     "@opam/opium": "0.17.1",
     "@opam/pgocaml": "github:Et7f3/pgocaml:pgocaml.opam#dunify",
+    "@opam/websocket-lwt-unix": "2.13",
     "@opam/yojson": "1.7.0",
     "@opam/zarith": "1.7",
     "@opam/ez-api": "*",
