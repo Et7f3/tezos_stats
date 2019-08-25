@@ -28,7 +28,7 @@
     "@opam/yojson": "1.7.0",
     "@opam/zarith": "1.7",
     "@opam/ez-api": "*",
-    "ocaml": "^4.7.1004"
+    "ocaml": "^4.7.1004 <4.8.0"
   },
   "esy": {
     "buildsInSource": "_build",
@@ -41,8 +41,7 @@
   },
   "devDependencies": {
     "@opam/ocp-indent": "1.7.0",
-    "@opam/utop": "2.4.1",
-    "ocaml": ">=4.6.0 <4.8.0"
+    "@opam/utop": "2.4.1"
   },
   "resolutions": {
     "@opam/camomile": "1.0.1",

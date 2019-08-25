@@ -1,5 +1,5 @@
 {
-  "checksum": "fc1497ff960b4010b8fdeba9a192fcb3",
+  "checksum": "dba5390e2fe7fb850787e2d978bffa0d",
   "root": "tezos_stats@link-dev:./package.json",
   "node": {
     "tezos_stats@link-dev:./package.json": {
@@ -23,7 +23,7 @@
         "@opam/dune@opam:1.11.2@81b81b31"
       ],
       "devDependencies": [
-        "ocaml@4.7.1004@d41d8cd9", "@opam/utop@opam:2.4.1@22a7327f",
+        "@opam/utop@opam:2.4.1@22a7327f",
         "@opam/ocp-indent@opam:1.7.0@9591524b"
       ]
     },
