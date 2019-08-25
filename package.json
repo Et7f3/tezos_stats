@@ -25,7 +25,6 @@
     "@opam/ocplib-json-typed": "0.7.1",
     "@opam/opium": "0.17.1",
     "@opam/pgocaml": "github:Et7f3/pgocaml:pgocaml.opam#dunify",
-    "@opam/utop": "2.4.0",
     "@opam/yojson": "1.7.0",
     "@opam/zarith": "1.7",
     "@opam/ez-api": "*",
@@ -42,7 +41,7 @@
   },
   "devDependencies": {
     "@opam/ocp-indent": "1.7.0",
-    "@opam/utop": "2.4.0",
+    "@opam/utop": "2.4.1",
     "ocaml": ">=4.6.0 <4.8.0"
   },
   "resolutions": {

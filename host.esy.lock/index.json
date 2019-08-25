@@ -1,5 +1,5 @@
 {
-  "checksum": "d9efc9d0d3f5d114db3ab55f271beaec",
+  "checksum": "fc1497ff960b4010b8fdeba9a192fcb3",
   "root": "tezos_stats@link-dev:./package.json",
   "node": {
     "tezos_stats@link-dev:./package.json": {
@@ -14,7 +14,7 @@
       "overrides": [ "host.json" ],
       "dependencies": [
         "ocaml@4.7.1004@d41d8cd9", "@opam/zarith@opam:1.7@1709d54c",
-        "@opam/yojson@opam:1.7.0@7056d985", "@opam/utop@opam:2.4.0@e9165610",
+        "@opam/yojson@opam:1.7.0@7056d985",
         "@opam/pgocaml@github:Et7f3/pgocaml:pgocaml.opam#7eb25fd07b66c1dc1b15e2e619a88f5d1d716aae@d41d8cd9",
         "@opam/opium@opam:0.17.1@c0266e64",
         "@opam/ocplib-json-typed@opam:0.7.1@7d28a333",
@@ -23,7 +23,7 @@
         "@opam/dune@opam:1.11.2@81b81b31"
       ],
       "devDependencies": [
-        "ocaml@4.7.1004@d41d8cd9", "@opam/utop@opam:2.4.0@e9165610",
+        "ocaml@4.7.1004@d41d8cd9", "@opam/utop@opam:2.4.1@22a7327f",
         "@opam/ocp-indent@opam:1.7.0@9591524b"
       ]
     },
@@ -181,20 +181,20 @@
         "ocaml@4.7.1004@d41d8cd9", "@opam/uchar@opam:0.0.2@c8218eea"
       ]
     },
-    "@opam/utop@opam:2.4.0@e9165610": {
-      "id": "@opam/utop@opam:2.4.0@e9165610",
+    "@opam/utop@opam:2.4.1@22a7327f": {
+      "id": "@opam/utop@opam:2.4.1@22a7327f",
       "name": "@opam/utop",
-      "version": "opam:2.4.0",
+      "version": "opam:2.4.1",
       "source": {
         "type": "install",
         "source": [
-          "archive:https://opam.ocaml.org/cache/md5/c9/c9d14aa542a6db57e9d1050c2cc6548d#md5:c9d14aa542a6db57e9d1050c2cc6548d",
-          "archive:https://github.com/ocaml-community/utop/releases/download/2.4.0/utop-2.4.0.tbz#md5:c9d14aa542a6db57e9d1050c2cc6548d"
+          "archive:https://opam.ocaml.org/cache/md5/d5/d51936e2180e42c812c91ec35a7de02a#md5:d51936e2180e42c812c91ec35a7de02a",
+          "archive:https://github.com/ocaml-community/utop/releases/download/2.4.1/utop-2.4.1.tbz#md5:d51936e2180e42c812c91ec35a7de02a"
         ],
         "opam": {
           "name": "utop",
-          "version": "2.4.0",
-          "path": "host.esy.lock/opam/utop.2.4.0"
+          "version": "2.4.1",
+          "path": "host.esy.lock/opam/utop.2.4.1"
         }
       },
       "overrides": [],
