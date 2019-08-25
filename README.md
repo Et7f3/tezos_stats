@@ -20,7 +20,7 @@ Note: the first time it will build the OCaml compiler that take some time on win
 
 install dev package (only one time)
 ```
-npm install --no-save https://github.com/Et7f3/bs-ocplib-json-typed/tarball/master reason-react
+npm install --no-save https://github.com/Et7f3/bs-ocplib-json-typed/tarball/master reason-react webpack webpack-cli
 ```
 
 install it locally (only one time)
@@ -33,10 +33,13 @@ npm link bs-platform
 start postgres server
 modify environnement variable in host.json
 `host_password` is special password that allow to kill server remotely so choose a correct one.
-To run the backend `esy @host run`
-To run the frontend `esy @host run:web`.
-To launch the sonde exec `esy run`
-
+To (compile if source has changed and) launch the sonde exec `esy run`
+To (compile if source has changed and) run the backend `esy @host run`
+To (compile if source has changed and) run the frontend website `esy @host run:web`.
+To compile the client source:
+`bsb -make-world`
+And to bundle it:
+`npm run webpack:prod`
 
 ## Todo
 - [ ] Frontend website

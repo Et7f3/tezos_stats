@@ -6,6 +6,8 @@
   "scripts": {
     "test": "echo no test",
     "run": "esy x sonde",
+    "webpack:prod": "webpack lib/js/src/web_client/main.bs.js --mode production -o lib/js/src/web_client/main.min.js",
+    "webpack:dev": "webpack lib/js/src/web_client/main.bs.js --mode development -o lib/js/src/web_client/main.js",
     "dump_db": "esy @host b dune exec src/dump_db/dump_db.exe"
   },
   "repository": {
