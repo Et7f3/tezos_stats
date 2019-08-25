@@ -2,3 +2,7 @@
  (name host_web)
  (public_name host_web)
  (libraries opium))
+
+(install
+ (section bin)
+ (files (../web_assets/index.html as index.html)))
