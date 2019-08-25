@@ -1,0 +1,4 @@
+(executable
+ (name host_web)
+ (public_name host_web)
+ (libraries opium))

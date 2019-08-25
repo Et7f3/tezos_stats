@@ -34,8 +34,8 @@ start postgres server
 modify environnement variable in host.json
 `host_password` is special password that allow to kill server remotely so choose a correct one.
 To run the backend `esy @host run`
-They are no frontend at the moment.
-To launch the sond exec `esy run`
+To run the frontend `esy @host run:web`.
+To launch the sonde exec `esy run`
 
 
 ## Todo

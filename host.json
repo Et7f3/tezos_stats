@@ -5,7 +5,8 @@
   "main": "node.js",
   "scripts": {
     "test": "echo no test",
-    "run": "esy @host b dune exec src/host_db/host_db.exe -- -p $LOCALPORT"
+    "run": "esy @host b dune exec src/host_db/host_db.exe -- -p $LOCALPORT",
+    "run:web": "esy @host b dune exec src/host_web/host_web.exe -- -p $LOCALPORTWEB"
   },
   "source": "./package.json",
   "override": {
@@ -14,6 +15,7 @@
     ],
     "buildEnv": {
       "LOCALPORT": "9000",
+      "LOCALPORTWEB": "9001",
       "PGHOST": "127.0.0.1",
       "PGPASSWORD": "DUMMY_PASSWORD",
       "host_password": "ANOTHER_DUMMY_PASSWORD"
