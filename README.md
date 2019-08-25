@@ -20,7 +20,7 @@ Note: the first time it will build the OCaml compiler that take some time on win
 
 install dev package (only one time)
 ```
-npm install https://github.com/Et7f3/bs-ocplib-json-typed/tarball/master reason-react
+npm install --no-save https://github.com/Et7f3/bs-ocplib-json-typed/tarball/master reason-react
 ```
 
 install it locally (only one time)
