@@ -35,6 +35,8 @@ for:
     build_script:
       - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
       - esy @appveyor install
+      - esy @appveyor build env
+      - esy @appveyor build echo $PGHOST
       - esy @appveyor build echo $PGPASSWORD
       - esy @appveyor build
 
