@@ -16,6 +16,7 @@
     "buildEnv": {
       "LOCALPORT": "9000",
       "LOCALPORTWEB": "9001",
+      "WSPORT": "9002",
       "PGHOST": "127.0.0.1",
       "PGPASSWORD": "DUMMY_PASSWORD",
       "host_password": "ANOTHER_DUMMY_PASSWORD"
